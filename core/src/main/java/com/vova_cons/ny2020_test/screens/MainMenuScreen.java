@@ -2,10 +2,8 @@ package com.vova_cons.ny2020_test.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.vova_cons.ny2020_test.services.ScreensService;
 import com.vova_cons.ny2020_test.services.ServiceLocator;
@@ -29,10 +27,15 @@ public class MainMenuScreen extends BaseScreen {
     public void start() {
         VerticalGroup container = new VerticalGroup();
         container.space(50);
-        Label marioCloneLabel = ViewUtils.createLabel("Start", FontsService.Size.H1, Color.WHITE);
-        container.addActor(marioCloneLabel);
-        ViewUtils.clickListener(marioCloneLabel, this::clickedMario);
-        marioCloneLabel.setDebug(true);
+        Label startLabel = ViewUtils.createLabel("Start", FontsService.Size.H1, Color.WHITE);
+        container.addActor(startLabel);
+        ViewUtils.clickListener(startLabel, this::clickedStart);
+        startLabel.setDebug(true);
+
+        Label creditsLabel = ViewUtils.createLabel("Credits", FontsService.Size.H1, Color.WHITE);
+        container.addActor(creditsLabel);
+        ViewUtils.clickListener(creditsLabel, this::clickedCredits);
+        creditsLabel.setDebug(true);
 
         Label exitLabel = ViewUtils.createLabel("Exit game", FontsService.Size.H1, Color.WHITE);
         container.addActor(exitLabel);
@@ -47,8 +50,12 @@ public class MainMenuScreen extends BaseScreen {
     public void update(float delta) {}
 
     //region logic
-    private void clickedMario() {
-        screensService.changeScreen(ScreenType.MarioGame);
+    private void clickedStart() {
+        screensService.changeScreen(ScreenType.GameScreen);
+    }
+
+    private void clickedCredits() {
+        screensService.changeScreen(ScreenType.Credits);
     }
 
     private void clickedExit() {

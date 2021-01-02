@@ -17,7 +17,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public ScreenType getScreenType() {
-        return ScreenType.MarioGame;
+        return ScreenType.GameScreen;
     }
 
     @Override

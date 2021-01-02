@@ -6,5 +6,5 @@ import java.io.Serializable;
  * Created by anbu on 27.10.19.
  **/
 public enum ScreenType implements Serializable {
-    TestScreen, MenuScreen, MarioGame,
+    TestScreen, MenuScreen, GameScreen, Credits,
 }
