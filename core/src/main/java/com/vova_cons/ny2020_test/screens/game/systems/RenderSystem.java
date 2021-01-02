@@ -33,6 +33,10 @@ public class RenderSystem extends SortedIteratingSystem {
         }
         tiles.put(TileType.GROUND, new Texture("mario/png/ground.png"));
         tiles.put(TileType.TRAP, new Texture("mario/png/spikes.png"));
+        tiles.put(TileType.LAVA, new Texture("mario/png/lava.png"));
+        tiles.put(TileType.BUTTON_RED, new Texture("mario/png/switch_red_off.png"));
+        tiles.put(TileType.COIN_GOLD, new Texture("mario/png/coin_gold.png"));
+        tiles.put(TileType.COIN_SILVER, new Texture("mario/png/coin_silver.png"));
     }
 
     private Texture createTextureFor(SpriteComponent.Type textureType) {

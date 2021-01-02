@@ -5,8 +5,8 @@ import com.vova_cons.ny2020_test.utils.RandomUtils;
 public class GameWorld {
     public TileMap level;
 
-    public void init(String file) {
-        level = new TileMap(30, 15);
+    public void random(int width, int height) {
+        level = new TileMap(width, height);
         level.defValue = TileType.GROUND;
         for(int i = 0; i < level.width*level.height*0.2f; i++) {
             level.set(RandomUtils.random.nextInt(level.width),

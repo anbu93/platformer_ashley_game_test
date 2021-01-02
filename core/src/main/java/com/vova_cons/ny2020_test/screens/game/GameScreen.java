@@ -9,6 +9,7 @@ import com.vova_cons.ny2020_test.screens.ScreenType;
 import com.vova_cons.ny2020_test.screens.game.components.*;
 import com.vova_cons.ny2020_test.screens.game.systems.*;
 import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
+import com.vova_cons.ny2020_test.screens.game.world.GameWorldParser;
 import com.vova_cons.ny2020_test.services.ScreensService;
 import com.vova_cons.ny2020_test.services.ServiceLocator;
 
@@ -22,8 +23,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void start() {
-        GameWorld world = new GameWorld();
-        world.init("level_1.txt");
+        GameWorld world = new GameWorldParser().parse(1);
 
         engine = new Engine();
         Entity player = new Entity();
