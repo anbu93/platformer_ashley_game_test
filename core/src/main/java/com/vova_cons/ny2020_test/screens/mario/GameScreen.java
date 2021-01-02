@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.vova_cons.ny2020_test.screens.BaseScreen;
 import com.vova_cons.ny2020_test.screens.ScreenType;
 import com.vova_cons.ny2020_test.screens.mario.components.*;
@@ -12,8 +11,6 @@ import com.vova_cons.ny2020_test.screens.mario.systems.*;
 import com.vova_cons.ny2020_test.screens.mario.world.GameWorld;
 import com.vova_cons.ny2020_test.services.ScreensService;
 import com.vova_cons.ny2020_test.services.ServiceLocator;
-import com.vova_cons.ny2020_test.services.fonts_service.FontsService;
-import com.vova_cons.ny2020_test.utils.ViewUtils;
 
 public class GameScreen extends BaseScreen {
     private Engine engine;
@@ -39,8 +36,7 @@ public class GameScreen extends BaseScreen {
 
         engine.addSystem(new PlayerInputSystem());
         engine.addSystem(new GravitySystem());
-        engine.addSystem(new MoveSystem());
-        engine.addSystem(new CollisionSystem(world));
+        engine.addSystem(new MoveSystem(world));
         engine.addSystem(new GroundStandingSystem(world));
         engine.addSystem(new RenderSystem(world, batch, 1));
     }
