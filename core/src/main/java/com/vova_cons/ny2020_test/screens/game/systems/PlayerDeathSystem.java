@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.math.Rectangle;
 import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
 import com.vova_cons.ny2020_test.screens.game.utils.Families;
 import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
@@ -65,20 +66,17 @@ public class PlayerDeathSystem extends EntitySystem {
         return false;
     }
 
+    private Rectangle rect1 = new Rectangle();
+    private Rectangle rect2 = new Rectangle();
     private boolean checkDeathFromEnemy(BodyComponent body) {
+        rect1.set(body.x, body.y, body.w, body.h);
         for(Entity enemy : enemies) {
             BodyComponent enemyBody = Mappers.body.get(enemy);
-            if (isCollisions(body, enemyBody)) {
+            rect2.set(enemyBody.x, enemyBody.y, enemyBody.w, enemyBody.h);
+            if (rect1.overlaps(rect2)) {
                 return true;
             }
         }
         return false;
-    }
-
-    private boolean isCollisions(BodyComponent body, BodyComponent enemyBody) {
-        return Math.abs(body.x + body.w/2f - enemyBody.x + enemyBody.w/2f)
-                        < (body.w/2f + 0.5f*enemyBody.w) &&
-                Math.abs(body.y + body.h/2f - enemyBody.y + enemyBody.h/2f)
-                        < (body.h/2f + 0.5f*enemyBody.h);
     }
 }

@@ -53,13 +53,13 @@ public class GameScreen extends BaseScreen {
                     case Slime:
                         entity.add(new EnemyComponent(EnemyComponent.Type.Slime));
                         entity.add(new SpriteComponent(SpriteComponent.Type.Slime));
-                        entity.add(new BodyComponent(enemyData.x, enemyData.y, 0.75f, 0.6f));
+                        entity.add(new BodyComponent(enemyData.x + 0.125f, enemyData.y, 0.75f, 0.6f));
                         entity.add(new GravityComponent());
                         break;
                     case Fly:
                         entity.add(new EnemyComponent(EnemyComponent.Type.Fly));
                         entity.add(new SpriteComponent(SpriteComponent.Type.Fly));
-                        entity.add(new BodyComponent(enemyData.x, enemyData.y, 0.8f, 0.4f));
+                        entity.add(new BodyComponent(enemyData.x + 0.1f, enemyData.y + 0.3f, 0.8f, 0.4f));
                         break;
                 }
                 entity.add(new VelocityComponent());
@@ -69,12 +69,12 @@ public class GameScreen extends BaseScreen {
             engine.addSystem(new PlayerInputSystem(world));
             engine.addSystem(new GravitySystem());
             engine.addSystem(new MoveSystem(world));
-            engine.addSystem(new PlayerDeathSystem(world));
             engine.addSystem(new GroundStandingSystem(world));
             engine.addSystem(new EnemyMoveSystem());
             engine.addSystem(new MechanismInteractionSystem(world));
             engine.addSystem(new CameraSystem(UI.SCENE_WIDTH / RenderSystem.TILE_SIZE,
                     UI.SCENE_HEIGHT / RenderSystem.TILE_SIZE));
+            engine.addSystem(new PlayerDeathSystem(world));
             engine.addSystem(new RenderSystem(world, batch, 1));
         }
     }
