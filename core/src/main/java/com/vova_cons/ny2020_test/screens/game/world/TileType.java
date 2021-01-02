@@ -1,4 +1,4 @@
-package com.vova_cons.ny2020_test.screens.mario.world;
+package com.vova_cons.ny2020_test.screens.game.world;
 
 public class TileType {
     public static final int EMPTY = 0;

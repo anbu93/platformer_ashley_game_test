@@ -1,7 +1,7 @@
-package com.vova_cons.ny2020_test.screens.mario.utils;
+package com.vova_cons.ny2020_test.screens.game.utils;
 
 import com.badlogic.ashley.core.Family;
-import com.vova_cons.ny2020_test.screens.mario.components.*;
+import com.vova_cons.ny2020_test.screens.game.components.*;
 
 public class Families {
     public static final Family player = Family.one(PlayerComponent.class).get();

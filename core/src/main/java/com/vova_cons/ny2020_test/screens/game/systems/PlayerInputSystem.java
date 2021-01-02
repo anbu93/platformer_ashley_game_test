@@ -1,4 +1,4 @@
-package com.vova_cons.ny2020_test.screens.mario.systems;
+package com.vova_cons.ny2020_test.screens.game.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -6,11 +6,11 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.vova_cons.ny2020_test.screens.mario.components.BodyComponent;
-import com.vova_cons.ny2020_test.screens.mario.components.VelocityComponent;
-import com.vova_cons.ny2020_test.screens.mario.utils.Families;
-import com.vova_cons.ny2020_test.screens.mario.utils.Mappers;
-import com.vova_cons.ny2020_test.screens.mario.utils.MathUtils;
+import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
+import com.vova_cons.ny2020_test.screens.game.components.VelocityComponent;
+import com.vova_cons.ny2020_test.screens.game.utils.Families;
+import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
+import com.vova_cons.ny2020_test.screens.game.utils.MathUtils;
 
 public class PlayerInputSystem extends EntitySystem {
     private float maxPlayerSpeed = 10; // meter per sec

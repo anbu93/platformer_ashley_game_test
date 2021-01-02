@@ -6,7 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.vova_cons.ny2020_test.screens.MainMenuScreen;
 import com.vova_cons.ny2020_test.screens.ScreenType;
-import com.vova_cons.ny2020_test.screens.mario.GameScreen;
+import com.vova_cons.ny2020_test.screens.game.GameScreen;
 import com.vova_cons.ny2020_test.services.ScreensService;
 import com.vova_cons.ny2020_test.services.ServiceLocator;
 import com.vova_cons.ny2020_test.services.fonts_service.FontsService;

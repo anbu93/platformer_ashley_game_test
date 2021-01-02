@@ -1,22 +1,17 @@
-package com.vova_cons.ny2020_test.screens.mario.systems;
+package com.vova_cons.ny2020_test.screens.game.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.vova_cons.ny2020_test.screens.mario.components.BodyComponent;
-import com.vova_cons.ny2020_test.screens.mario.components.SpriteComponent;
-import com.vova_cons.ny2020_test.screens.mario.utils.Families;
-import com.vova_cons.ny2020_test.screens.mario.utils.Mappers;
-import com.vova_cons.ny2020_test.screens.mario.world.GameWorld;
-import com.vova_cons.ny2020_test.screens.mario.world.TileType;
-
-import java.util.Comparator;
+import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
+import com.vova_cons.ny2020_test.screens.game.components.SpriteComponent;
+import com.vova_cons.ny2020_test.screens.game.utils.Families;
+import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
+import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
+import com.vova_cons.ny2020_test.screens.game.world.TileType;
 
 public class RenderSystem extends SortedIteratingSystem {
     private static final float TILE_SIZE = 75;
