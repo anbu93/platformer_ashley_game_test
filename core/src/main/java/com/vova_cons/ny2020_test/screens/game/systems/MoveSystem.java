@@ -45,8 +45,10 @@ public class MoveSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        for(Entity entity : entities) {
-            processEntity(entity, deltaTime);
+        if (world.state == GameWorld.GAME_PROCESS) {
+            for (Entity entity : entities) {
+                processEntity(entity, deltaTime);
+            }
         }
     }
 

@@ -3,6 +3,10 @@ package com.vova_cons.ny2020_test.screens.game.world;
 import com.vova_cons.ny2020_test.utils.RandomUtils;
 
 public class GameWorld {
+    public static final int GAME_PROCESS = 0;
+    public static final int PLAYER_DEATH = 1;
+    public static final int GAME_OVER = 2;
+    public int state = GAME_PROCESS;
     public TileMap level;
 
     public void random(int width, int height) {
