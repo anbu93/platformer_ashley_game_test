@@ -6,11 +6,12 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.vova_cons.ny2020_test.screens.game.components.AnimationComponent;
 import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
 import com.vova_cons.ny2020_test.screens.game.components.VelocityComponent;
 import com.vova_cons.ny2020_test.screens.game.utils.Families;
 import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
-import com.vova_cons.ny2020_test.screens.game.utils.MathUtils;
+import com.vova_cons.ny2020_test.utils.MathUtils;
 
 public class PlayerInputSystem extends EntitySystem {
     private float maxPlayerSpeed = 10; // meter per sec
@@ -49,6 +50,26 @@ public class PlayerInputSystem extends EntitySystem {
         super.update(deltaTime);
         calculateInput();
         applyInput(deltaTime);
+        applyAnimation(deltaTime);
+    }
+
+    private void applyAnimation(float deltaTime) {
+        for(Entity entity : entities) {
+            AnimationComponent animation = Mappers.animation.get(entity);
+            VelocityComponent velocity = Mappers.velocity.get(entity);
+            BodyComponent body = Mappers.body.get(entity);
+            if (body.grounded) {
+                animation.time += deltaTime;
+                if (velocity.x != 0) {
+                    animation.type = AnimationComponent.Type.Walk;
+                    animation.direction = velocity.x > 0 ? 1 : -1;
+                } else {
+                    animation.type = AnimationComponent.Type.Idle;
+                }
+            } else {
+                animation.type = AnimationComponent.Type.Jump;
+            }
+        }
     }
 
     private void calculateInput() {

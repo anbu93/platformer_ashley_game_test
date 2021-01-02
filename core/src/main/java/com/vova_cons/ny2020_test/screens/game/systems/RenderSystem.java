@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.vova_cons.ny2020_test.screens.game.components.AnimationComponent;
 import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
 import com.vova_cons.ny2020_test.screens.game.components.CameraComponent;
 import com.vova_cons.ny2020_test.screens.game.components.SpriteComponent;
@@ -24,6 +25,7 @@ public class RenderSystem extends SortedIteratingSystem {
     private ImmutableArray<Entity> cameras;
     private float cameraX, cameraY;
     private IntMap<Texture> tiles = new IntMap<>();
+    private PlayerAnimationRenderer playerRenderer = new PlayerAnimationRenderer();
 
     public RenderSystem(GameWorld world, Batch batch) {
         this(world, batch, 0);
@@ -98,11 +100,16 @@ public class RenderSystem extends SortedIteratingSystem {
     }
 
     protected void processEntity(Entity entity, float deltaTime) {
-        SpriteComponent sprite = Mappers.sprite.get(entity);
         BodyComponent body = Mappers.body.get(entity);
-        Texture texture = textures.get(sprite.type);
-        batch.draw(texture, -cameraX + body.x * TILE_SIZE,
-                -cameraY + body.y * TILE_SIZE,
-                body.w * TILE_SIZE, body.h * TILE_SIZE);
+        SpriteComponent sprite = Mappers.sprite.get(entity);
+        if (sprite != null) {
+            Texture texture = textures.get(sprite.type);
+            batch.draw(texture, -cameraX + body.x * TILE_SIZE,
+                    -cameraY + body.y * TILE_SIZE,
+                    body.w * TILE_SIZE, body.h * TILE_SIZE);
+        } else {
+            AnimationComponent animation = Mappers.animation.get(entity);
+            playerRenderer.render(batch, cameraX, cameraY, body, animation);
+        }
     }
 }

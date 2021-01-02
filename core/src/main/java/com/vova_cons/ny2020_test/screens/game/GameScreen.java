@@ -38,7 +38,7 @@ public class GameScreen extends BaseScreen {
         player.add(new PlayerComponent());
         player.add(new VelocityComponent());
         player.add(new GravityComponent());
-        player.add(new SpriteComponent(1, SpriteComponent.Type.PlayerIdle));
+        player.add(new AnimationComponent());
         engine.addEntity(player);
 
         Entity camera = new Entity();
