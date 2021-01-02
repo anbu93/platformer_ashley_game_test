@@ -28,6 +28,18 @@ public class GameWorldParser {
                     if (tiles[x] == '@') {
                         world.playerX = x;
                         world.playerY = y;
+                    } else if (tiles[x] == 'S') {
+                        GameWorld.Enemy enemy = new GameWorld.Enemy();
+                        enemy.x = x;
+                        enemy.y = y;
+                        enemy.type = GameWorld.EnemyType.Slime;
+                        world.enemies.add(enemy);
+                    } else if (tiles[x] == 'F') {
+                        GameWorld.Enemy enemy = new GameWorld.Enemy();
+                        enemy.x = x;
+                        enemy.y = y;
+                        enemy.type = GameWorld.EnemyType.Fly;
+                        world.enemies.add(enemy);
                     } else {
                         int tile = TileType.detectTile(tiles[x]);
                         world.level.set(x, y, tile);

@@ -10,6 +10,8 @@ public class TileType {
     public static final int LAVA = 22;
     // 10X - entities
     public static final int PLAYER = 101;
+    public static final int SLIME = 102;
+    public static final int FLY = 103;
     // 11X - buttons
     public static final int BUTTON_RED = 111;
     public static final int BUTTON_RED_ACTIVE = 112;
@@ -42,6 +44,8 @@ public class TileType {
             case 'T': return TRAP;
             case 'L': return LAVA;
             case '@': return PLAYER;
+            case 'S': return SLIME;
+            case 'F': return FLY;
             case 'B': return BUTTON_RED;
             case 'g': return COIN_GOLD;
             case 's': return COIN_SILVER;

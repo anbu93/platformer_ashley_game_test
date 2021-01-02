@@ -47,6 +47,24 @@ public class GameScreen extends BaseScreen {
             camera.add(new CameraComponent(player));
             engine.addEntity(camera);
 
+            for(GameWorld.Enemy enemyData : world.enemies) {
+                Entity entity = new Entity();
+                switch(enemyData.type) {
+                    case Slime:
+                        entity.add(new EnemyComponent(EnemyComponent.Type.Slime));
+                        entity.add(new SpriteComponent(SpriteComponent.Type.Slime));
+                        entity.add(new BodyComponent(enemyData.x, enemyData.y, 0.75f, 0.6f));
+                        break;
+                    case Fly:
+                        entity.add(new EnemyComponent(EnemyComponent.Type.Fly));
+                        entity.add(new SpriteComponent(SpriteComponent.Type.Fly));
+                        entity.add(new BodyComponent(enemyData.x, enemyData.y, 0.8f, 0.4f));
+                        break;
+                }
+                entity.add(new VelocityComponent());
+                engine.addEntity(entity);
+            }
+
             engine.addSystem(new PlayerInputSystem(world));
             engine.addSystem(new GravitySystem());
             engine.addSystem(new MoveSystem(world));

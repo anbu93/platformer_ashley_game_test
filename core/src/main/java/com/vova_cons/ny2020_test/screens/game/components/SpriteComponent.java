@@ -17,5 +17,7 @@ public class SpriteComponent implements Component {
 
     public enum Type {
         PlayerIdle,
+        Slime,
+        Fly
     }
 }

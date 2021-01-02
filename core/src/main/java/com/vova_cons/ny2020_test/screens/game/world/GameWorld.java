@@ -1,5 +1,6 @@
 package com.vova_cons.ny2020_test.screens.game.world;
 
+import com.badlogic.gdx.utils.Array;
 import com.vova_cons.ny2020_test.screens.game.ui.GameUi;
 import com.vova_cons.ny2020_test.utils.RandomUtils;
 
@@ -11,6 +12,7 @@ public class GameWorld {
     public TileMap level;
     public GameUi ui;
     public int playerX, playerY;
+    public Array<Enemy> enemies = new Array<>();
 
     public void random(int width, int height) {
         level = new TileMap(width, height);
@@ -29,5 +31,15 @@ public class GameWorld {
             }
             System.out.println();
         }
+    }
+
+    public static class Enemy {
+        public int x, y;
+        public EnemyType type;
+    }
+
+    public enum EnemyType {
+        Slime,
+        Fly
     }
 }

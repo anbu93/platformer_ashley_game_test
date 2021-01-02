@@ -52,12 +52,21 @@ public class RenderSystem extends SortedIteratingSystem {
         switch(textureType) {
             case PlayerIdle:
                 return new Texture("mario/png/character/front.png");
+            case Slime:
+                return new Texture("mario/png/enemies/slime_walk.png");
+            case Fly:
+                return new Texture("mario/png/enemies/fly_fly.png");
         }
         return null;
     }
 
     private static int compare(Entity e1, Entity e2) {
-        return (int)Math.signum(Mappers.sprite.get(e1).z - Mappers.sprite.get(e2).z);
+        SpriteComponent s1 = Mappers.sprite.get(e1);
+        SpriteComponent s2 = Mappers.sprite.get(e2);
+        if (s1 != null && s2 != null) {
+            return (int) Math.signum(s1.z - s2.z);
+        }
+        return -1;
     }
 
     @Override
