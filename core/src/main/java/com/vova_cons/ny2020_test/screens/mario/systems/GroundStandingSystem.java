@@ -8,9 +8,21 @@ import com.vova_cons.ny2020_test.screens.mario.components.BodyComponent;
 import com.vova_cons.ny2020_test.screens.mario.components.VelocityComponent;
 import com.vova_cons.ny2020_test.screens.mario.utils.Families;
 import com.vova_cons.ny2020_test.screens.mario.utils.Mappers;
+import com.vova_cons.ny2020_test.screens.mario.world.GameWorld;
+import com.vova_cons.ny2020_test.screens.mario.world.TileType;
 
 public class GroundStandingSystem extends EntitySystem {
+    private final GameWorld world;
     private ImmutableArray<Entity> entities;
+
+    public GroundStandingSystem(GameWorld world) {
+        this.world = world;
+    }
+
+    public GroundStandingSystem(int priority, GameWorld world) {
+        super(priority);
+        this.world = world;
+    }
 
     @Override
     public void addedToEngine(Engine engine) {
@@ -24,17 +36,50 @@ public class GroundStandingSystem extends EntitySystem {
         for(Entity entity : entities) {
             BodyComponent body = Mappers.body.get(entity);
             VelocityComponent velocity = Mappers.velocity.get(entity);
-            if (body.grounded) {
-                if (velocity.y > 0) {
-                    body.grounded = false;
+            processEntity(body, velocity);
+        }
+    }
+
+    private void processEntity(BodyComponent body, VelocityComponent velocity) {
+        if (body.grounded) {
+            if (velocity.y > 0) { // jump now
+                body.grounded = false;
+            } else { // velocity.y == 0 stand on ground in prev frame
+                if (!isExistsGroundUnder(body)) {
+                    System.out.println("Drop down " + body.x + " " + body.y);
+                    body.grounded = false; // start drop down
                 }
-            } else { // on air, check grounded now
-                if (body.y <= 0) {
-                    body.grounded = true;
-                    body.y = 0;
-                    velocity.y = 0; //stop drop down
+            }
+        } else if (velocity.y < 0) { // on drop down, check grounded now
+            if (body.y < 0) { // less than 0 workaround
+                body.grounded = true; // set grounded now
+                body.y = 0;
+                velocity.y = 0; //stop drop down
+                return;
+            }
+            int y = (int) body.y;
+            if (body.y - (int) body.y > 0.5f) {
+                for (int x = (int) (body.x + 0.3f); x < body.x + body.w - 0.3f; x++) {
+                    int tile = world.level.get(x, y);
+                    if (tile == TileType.GROUND) {
+                        body.grounded = true; // set grounded now
+                        body.y = y + 1;
+                        velocity.y = 0; //stop drop down
+                        return;
+                    }
                 }
             }
         }
+    }
+
+    private boolean isExistsGroundUnder(BodyComponent body) {
+        int y = (int) body.y - 1;
+        for (int x = (int) (body.x + 0.3f); x < body.x + body.w - 0.3f; x++) {
+            int tile = world.level.get(x, y);
+            if (tile == TileType.GROUND) {
+                return true;
+            }
+        }
+        return false;
     }
 }

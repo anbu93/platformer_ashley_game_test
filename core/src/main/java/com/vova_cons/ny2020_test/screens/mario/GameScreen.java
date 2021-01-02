@@ -30,7 +30,7 @@ public class GameScreen extends BaseScreen {
 
         engine = new Engine();
         Entity player = new Entity();
-        player.add(new BodyComponent(0, 0, 1f, 2f));
+        player.add(new BodyComponent(0, 0, 1f, 1.85f));
         player.add(new PlayerComponent());
         player.add(new VelocityComponent());
         player.add(new GravityComponent());
@@ -40,7 +40,8 @@ public class GameScreen extends BaseScreen {
         engine.addSystem(new PlayerInputSystem());
         engine.addSystem(new GravitySystem());
         engine.addSystem(new MoveSystem());
-        engine.addSystem(new GroundStandingSystem());
+        engine.addSystem(new CollisionSystem(world));
+        engine.addSystem(new GroundStandingSystem(world));
         engine.addSystem(new RenderSystem(world, batch, 1));
     }
 

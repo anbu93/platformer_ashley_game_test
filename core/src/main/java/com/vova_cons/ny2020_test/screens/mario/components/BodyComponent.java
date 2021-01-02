@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class BodyComponent implements Component {
     public float x, y, w, h;
-    public boolean grounded = false;
+    public boolean grounded = true;
 
     public BodyComponent() {}
 

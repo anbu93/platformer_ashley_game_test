@@ -13,12 +13,13 @@ import com.vova_cons.ny2020_test.screens.mario.utils.Mappers;
 import com.vova_cons.ny2020_test.screens.mario.utils.MathUtils;
 
 public class PlayerInputSystem extends EntitySystem {
-    private float maxPlayerSpeed = 20; // meter per sec
-    private float playerAcceleration = 40; // meter per sec^2
+    private float maxPlayerSpeed = 10; // meter per sec
+    private float playerAcceleration = 30; // meter per sec^2
     private float playerDeceleration = 80; // meter per sec^2
-    private float jumpSpeed = 22; // meter per sec^2
+    private float jumpSpeed = 20; // meter per sec^2
     private ImmutableArray<Entity> entities;
     private boolean jumpUsed = false;
+    private boolean jumpTouchUp = true;
     private int moveDirection = 0;
 
     public PlayerInputSystem() {}
@@ -54,7 +55,12 @@ public class PlayerInputSystem extends EntitySystem {
         moveDirection = 0;
         jumpUsed = false;
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            jumpUsed = true;
+            if (jumpTouchUp) {
+                jumpUsed = true;
+                jumpTouchUp = false;
+            }
+        } else {
+            jumpTouchUp = true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             moveDirection -= 1;
