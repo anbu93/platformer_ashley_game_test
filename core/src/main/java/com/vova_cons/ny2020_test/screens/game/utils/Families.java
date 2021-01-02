@@ -9,4 +9,5 @@ public class Families {
     public static final Family moved = Family.all(BodyComponent.class, VelocityComponent.class).get();
     public static final Family gravity = Family.all(GravityComponent.class, VelocityComponent.class).get();
     public static final Family drawing = Family.all(BodyComponent.class, SpriteComponent.class).get();
+    public static final Family camera = Family.one(CameraComponent.class).get();
 }

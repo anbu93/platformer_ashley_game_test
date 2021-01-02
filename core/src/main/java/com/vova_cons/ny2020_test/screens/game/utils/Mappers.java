@@ -8,4 +8,5 @@ public class Mappers {
     public static final ComponentMapper<VelocityComponent> velocity = ComponentMapper.getFor(VelocityComponent.class);
     public static final ComponentMapper<SpriteComponent> sprite = ComponentMapper.getFor(SpriteComponent.class);
     public static final ComponentMapper<GravityComponent> gravity = ComponentMapper.getFor(GravityComponent.class);
+    public static final ComponentMapper<CameraComponent> camera = ComponentMapper.getFor(CameraComponent.class);
 }

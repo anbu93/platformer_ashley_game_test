@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.vova_cons.ny2020_test.screens.BaseScreen;
 import com.vova_cons.ny2020_test.screens.ScreenType;
+import com.vova_cons.ny2020_test.screens.UI;
 import com.vova_cons.ny2020_test.screens.game.components.*;
 import com.vova_cons.ny2020_test.screens.game.systems.*;
 import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
@@ -34,10 +35,16 @@ public class GameScreen extends BaseScreen {
         player.add(new SpriteComponent(1, SpriteComponent.Type.PlayerIdle));
         engine.addEntity(player);
 
+        Entity camera = new Entity();
+        camera.add(new CameraComponent(player));
+        engine.addEntity(camera);
+
         engine.addSystem(new PlayerInputSystem());
         engine.addSystem(new GravitySystem());
         engine.addSystem(new MoveSystem(world));
         engine.addSystem(new GroundStandingSystem(world));
+        engine.addSystem(new CameraSystem(UI.SCENE_WIDE_WIDTH / RenderSystem.TILE_SIZE,
+                UI.SCENE_HEIGHT/ RenderSystem.TILE_SIZE));
         engine.addSystem(new RenderSystem(world, batch, 1));
     }
 

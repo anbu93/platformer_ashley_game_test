@@ -1,12 +1,15 @@
 package com.vova_cons.ny2020_test.screens.game.systems;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
+import com.vova_cons.ny2020_test.screens.game.components.CameraComponent;
 import com.vova_cons.ny2020_test.screens.game.components.SpriteComponent;
 import com.vova_cons.ny2020_test.screens.game.utils.Families;
 import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
@@ -14,10 +17,12 @@ import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
 import com.vova_cons.ny2020_test.screens.game.world.TileType;
 
 public class RenderSystem extends SortedIteratingSystem {
-    private static final float TILE_SIZE = 75;
+    public static final float TILE_SIZE = 75;
     private final GameWorld world;
     private final Batch batch;
     private ObjectMap<SpriteComponent.Type, Texture> textures = new ObjectMap<>();
+    private ImmutableArray<Entity> cameras;
+    private float cameraX, cameraY;
     private IntMap<Texture> tiles = new IntMap<>();
 
     public RenderSystem(GameWorld world, Batch batch) {
@@ -52,13 +57,29 @@ public class RenderSystem extends SortedIteratingSystem {
     }
 
     @Override
+    public void addedToEngine(Engine engine) {
+        super.addedToEngine(engine);
+        cameras = engine.getEntitiesFor(Families.camera);
+    }
+
+    @Override
     public void update(float deltaTime) {
         batch.begin();
+        detectCamera();
         drawWorld();
         // render entities by z index
         super.update(deltaTime);
         batch.flush();
         batch.end();
+    }
+
+    private void detectCamera() {
+        for(Entity entity : cameras) {
+            CameraComponent camera = Mappers.camera.get(entity);
+            cameraX = camera.x * TILE_SIZE;
+            cameraY = camera.y * TILE_SIZE;
+            return;
+        }
     }
 
     private void drawWorld() {
@@ -71,7 +92,8 @@ public class RenderSystem extends SortedIteratingSystem {
         }
         Texture texture = tiles.get(tile, null);
         if (texture != null) {
-            batch.draw(texture, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            batch.draw(texture, -cameraX + x * TILE_SIZE,
+                    -cameraY + y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
     }
 
@@ -79,7 +101,8 @@ public class RenderSystem extends SortedIteratingSystem {
         SpriteComponent sprite = Mappers.sprite.get(entity);
         BodyComponent body = Mappers.body.get(entity);
         Texture texture = textures.get(sprite.type);
-        batch.draw(texture, body.x * TILE_SIZE, body.y * TILE_SIZE,
+        batch.draw(texture, -cameraX + body.x * TILE_SIZE,
+                -cameraY + body.y * TILE_SIZE,
                 body.w * TILE_SIZE, body.h * TILE_SIZE);
     }
 }
