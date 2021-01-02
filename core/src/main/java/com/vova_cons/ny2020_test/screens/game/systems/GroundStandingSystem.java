@@ -12,6 +12,7 @@ import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
 import com.vova_cons.ny2020_test.screens.game.world.TileType;
 
 public class GroundStandingSystem extends EntitySystem {
+    public static final float PRECISION = 0.0f;
     private final GameWorld world;
     private ImmutableArray<Entity> entities;
 
@@ -59,9 +60,9 @@ public class GroundStandingSystem extends EntitySystem {
             }
             int y = (int) body.y;
             if (body.y - (int) body.y > 0.5f) {
-                for (int x = (int) (body.x + 0.3f); x < body.x + body.w - 0.3f; x++) {
+                for (int x = (int) (body.x + PRECISION); x < body.x + body.w - PRECISION; x++) {
                     int tile = world.level.get(x, y);
-                    if (tile == TileType.GROUND) {
+                    if (TileType.isGroundTile(tile)) {
                         body.grounded = true; // set grounded now
                         body.y = y + 1;
                         velocity.y = 0; //stop drop down
@@ -74,9 +75,9 @@ public class GroundStandingSystem extends EntitySystem {
 
     private boolean isExistsGroundUnder(BodyComponent body) {
         int y = (int) body.y - 1;
-        for (int x = (int) (body.x + 0.3f); x < body.x + body.w - 0.3f; x++) {
+        for (int x = (int) (body.x + PRECISION); x < body.x + body.w - PRECISION; x++) {
             int tile = world.level.get(x, y);
-            if (tile == TileType.GROUND) {
+            if (TileType.isGroundTile(tile)) {
                 return true;
             }
         }

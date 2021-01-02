@@ -2,6 +2,10 @@ package com.vova_cons.ny2020_test.screens.game.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.vova_cons.ny2020_test.screens.ScreenType;
+import com.vova_cons.ny2020_test.screens.game.GameScreen;
+import com.vova_cons.ny2020_test.services.ScreensService;
+import com.vova_cons.ny2020_test.services.ServiceLocator;
 
 import java.util.Scanner;
 
@@ -26,7 +30,11 @@ public class GameWorldParser {
             }
             return world;
         } catch (Exception e) {
-            throw new RuntimeException("Error with parsing level " + levelPath, e);
+            GameScreen.LEVEL = 1;
+            new RuntimeException("Error with parsing level " + levelPath, e).printStackTrace();
+            ScreensService screensService = ServiceLocator.getService(ScreensService.class);
+            screensService.changeScreen(ScreenType.MenuScreen);
+            return null;
         }
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.Align;
+import com.vova_cons.ny2020_test.screens.game.GameScreen;
 import com.vova_cons.ny2020_test.services.ScreensService;
 import com.vova_cons.ny2020_test.services.ServiceLocator;
 import com.vova_cons.ny2020_test.services.fonts_service.FontsService;
@@ -51,6 +52,7 @@ public class MainMenuScreen extends BaseScreen {
 
     //region logic
     private void clickedStart() {
+        GameScreen.LEVEL = 1;
         screensService.changeScreen(ScreenType.GameScreen);
     }
 

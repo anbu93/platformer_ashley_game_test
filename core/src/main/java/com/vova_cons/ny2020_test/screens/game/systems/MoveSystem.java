@@ -88,7 +88,7 @@ public class MoveSystem extends EntitySystem {
         for(int x =(int) (body.x + PRECISION_H); x < body.x + body.w - PRECISION_H; x++) {
             for(int y =(int) (body.y + PRECISION_V); y < body.y + body.h - PRECISION_V; y++) {
                 int tile = world.level.get(x, y);
-                if (tile == TileType.GROUND) {
+                if (TileType.isGroundTile(tile)) {
                     // try shift horizontal
                     if (body.x + body.w/2f < x + 0.1f) {
                         // если середина объекта находится слева, сдвиг влево
@@ -109,7 +109,7 @@ public class MoveSystem extends EntitySystem {
             int y = (int) (body.y + body.h);
             for (int x = (int) (body.x + PRECISION_H); x < body.x + body.w - PRECISION_H; x++) {
                 int tile = world.level.get(x, y);
-                if (tile == TileType.GROUND) { // head collision with ground tile, stop jumping
+                if (TileType.isGroundTile(tile)) { // head collision with ground tile, stop jumping
                     velocity.y = 0;
                     body.y = y - body.h;
                     System.out.println("Head hit");

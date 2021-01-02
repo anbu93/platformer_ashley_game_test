@@ -1,4 +1,4 @@
-package com.vova_cons.ny2020_test.screens.credits;
+package com.vova_cons.ny2020_test.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

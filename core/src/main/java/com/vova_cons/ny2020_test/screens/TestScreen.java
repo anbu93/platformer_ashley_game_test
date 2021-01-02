@@ -1,4 +1,4 @@
-package com.vova_cons.ny2020_test.screens.test;
+package com.vova_cons.ny2020_test.screens;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;

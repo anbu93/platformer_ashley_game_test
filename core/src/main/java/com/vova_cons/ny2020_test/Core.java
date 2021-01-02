@@ -2,11 +2,10 @@ package com.vova_cons.ny2020_test;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.vova_cons.ny2020_test.screens.MainMenuScreen;
 import com.vova_cons.ny2020_test.screens.ScreenType;
-import com.vova_cons.ny2020_test.screens.credits.CreditsScreen;
+import com.vova_cons.ny2020_test.screens.CreditsScreen;
 import com.vova_cons.ny2020_test.screens.game.GameScreen;
 import com.vova_cons.ny2020_test.services.GameSpeedService;
 import com.vova_cons.ny2020_test.services.ScreensService;

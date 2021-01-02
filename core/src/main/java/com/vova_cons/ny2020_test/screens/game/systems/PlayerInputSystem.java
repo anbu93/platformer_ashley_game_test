@@ -11,6 +11,7 @@ import com.vova_cons.ny2020_test.screens.game.components.BodyComponent;
 import com.vova_cons.ny2020_test.screens.game.components.VelocityComponent;
 import com.vova_cons.ny2020_test.screens.game.utils.Families;
 import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
+import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
 import com.vova_cons.ny2020_test.utils.MathUtils;
 
 public class PlayerInputSystem extends EntitySystem {
@@ -18,15 +19,19 @@ public class PlayerInputSystem extends EntitySystem {
     private float playerAcceleration = 30; // meter per sec^2
     private float playerDeceleration = 80; // meter per sec^2
     private float jumpSpeed = 20; // meter per sec^2
+    private final GameWorld world;
     private ImmutableArray<Entity> entities;
     private boolean jumpUsed = false;
     private boolean jumpTouchUp = true;
     private int moveDirection = 0;
 
-    public PlayerInputSystem() {}
+    public PlayerInputSystem(GameWorld world) {
+        this.world = world;
+    }
 
-    public PlayerInputSystem(int priority) {
+    public PlayerInputSystem(int priority, GameWorld world) {
         super(priority);
+        this.world = world;
     }
 
     @Override
@@ -48,9 +53,16 @@ public class PlayerInputSystem extends EntitySystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        calculateInput();
-        applyInput(deltaTime);
-        applyAnimation(deltaTime);
+        if (world.state == GameWorld.GAME_PROCESS) {
+            calculateInput();
+            applyInput(deltaTime);
+            applyAnimation(deltaTime);
+        } else {
+            for(Entity entity : entities) {
+                AnimationComponent animation = Mappers.animation.get(entity);
+                animation.type = AnimationComponent.Type.Idle;
+            }
+        }
     }
 
     private void applyAnimation(float deltaTime) {
