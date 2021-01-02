@@ -24,8 +24,14 @@ public class GameWorldParser {
                 String tileLine = scanner.nextLine();
                 char[] tiles = tileLine.toCharArray();
                 for(int x = 0; x < Math.min(tileLine.length(), width); x++) {
-                    int tile = TileType.detectTile(tiles[x]);
-                    world.level.set(x, height - line - 1, tile);
+                    int y = height - line - 1;
+                    if (tiles[x] == '@') {
+                        world.playerX = x;
+                        world.playerY = y;
+                    } else {
+                        int tile = TileType.detectTile(tiles[x]);
+                        world.level.set(x, y, tile);
+                    }
                 }
             }
             return world;

@@ -10,6 +10,7 @@ public class GameWorld {
     public int state = GAME_PROCESS;
     public TileMap level;
     public GameUi ui;
+    public int playerX, playerY;
 
     public void random(int width, int height) {
         level = new TileMap(width, height);

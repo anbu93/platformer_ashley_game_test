@@ -39,8 +39,9 @@ public class Core extends Game {
             screen.render(delta);
         }
         if (nextScreen != null) {
-            super.setScreen(nextScreen);
+            Screen screenTmp = nextScreen;
             nextScreen = null;
+            super.setScreen(screenTmp);
         }
     }
 

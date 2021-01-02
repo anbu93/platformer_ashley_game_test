@@ -109,7 +109,7 @@ public class RenderSystem extends SortedIteratingSystem {
             batch.draw(texture, -cameraX + body.x * TILE_SIZE,
                     -cameraY + body.y * TILE_SIZE,
                     body.w * TILE_SIZE, body.h * TILE_SIZE);
-        } else {
+        } else { // TODO fix after
             AnimationComponent animation = Mappers.animation.get(entity);
             playerRenderer.render(batch, cameraX, cameraY, body, animation);
         }

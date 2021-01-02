@@ -17,7 +17,7 @@ public class GameUi extends Group {
 
     public GameUi(int level) {
         Label levelLabel = ViewUtils.createLabel("Level: " + level, FontsService.Size.H1, Color.RED);
-        levelLabel.setPosition(UI.SCENE_WIDE_WIDTH/2f, UI.SCENE_HEIGHT-10, Align.top);
+        levelLabel.setPosition(UI.SCENE_WIDTH /2f, UI.SCENE_HEIGHT-10, Align.top);
         this.addActor(levelLabel);
 
         scoreLabel = ViewUtils.createLabel("Score: 0", FontsService.Size.H1, Color.RED);
@@ -31,8 +31,8 @@ public class GameUi extends Group {
         content.space(50);
         content.align(Align.center);
         content.addActor(ViewUtils.createLabel("GAME OVER!", FontsService.Size.H1, Color.RED));
-        content.addActor(ViewUtils.createLabel("Для перезагрузки используйте R", FontsService.Size.H2, Color.RED));
-        content.setPosition(UI.SCENE_WIDE_WIDTH/2f, UI.SCENE_HEIGHT/2f, Align.center);
+        content.addActor(ViewUtils.createLabel("For restart press R", FontsService.Size.H2, Color.RED));
+        content.setPosition(UI.SCENE_WIDTH /2f, UI.SCENE_HEIGHT/2f, Align.center);
         this.addActor(content);
     }
 
@@ -41,8 +41,8 @@ public class GameUi extends Group {
         content.space(50);
         content.align(Align.center);
         content.addActor(ViewUtils.createLabel("YOU WIN!", FontsService.Size.H1, Color.RED));
-        content.addActor(ViewUtils.createLabel("Для продолжения нажмите ENTER", FontsService.Size.H2, Color.RED));
-        content.setPosition(UI.SCENE_WIDE_WIDTH/2f, UI.SCENE_HEIGHT/2f, Align.center);
+        content.addActor(ViewUtils.createLabel("For continue press ENTER", FontsService.Size.H2, Color.RED));
+        content.setPosition(UI.SCENE_WIDTH /2f, UI.SCENE_HEIGHT/2f, Align.center);
         this.addActor(content);
         GameScreen.LEVEL++;
     }

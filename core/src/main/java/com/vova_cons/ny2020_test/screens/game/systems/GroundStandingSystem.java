@@ -52,7 +52,7 @@ public class GroundStandingSystem extends EntitySystem {
                 }
             }
         } else if (velocity.y < 0) { // on drop down, check grounded now
-            if (body.y < 0) { // less than 0 workaround
+            if (body.y < 0) { // less than 0 workaround, now not need it (MoveSystem fix it)
                 body.grounded = true; // set grounded now
                 body.y = 0;
                 velocity.y = 0; //stop drop down

@@ -6,9 +6,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by anbu on 21.10.19.
- **/
 public class FontsServiceV2 implements FontsService {
     private Map<Size, BitmapFont> fontsMap;
 

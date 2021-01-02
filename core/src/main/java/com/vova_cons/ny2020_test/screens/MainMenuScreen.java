@@ -43,7 +43,7 @@ public class MainMenuScreen extends BaseScreen {
         ViewUtils.clickListener(exitLabel, this::clickedExit);
         exitLabel.setDebug(true);
 
-        container.setPosition(UI.SCENE_WIDE_WIDTH/2f, UI.SCENE_HEIGHT/2f, Align.center);
+        container.setPosition(UI.SCENE_WIDTH /2f, UI.SCENE_HEIGHT/2f, Align.center);
         this.addActor(container);
     }
 

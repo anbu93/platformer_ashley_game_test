@@ -91,11 +91,11 @@ public class MoveSystem extends EntitySystem {
                 if (TileType.isGroundTile(tile)) {
                     // try shift horizontal
                     if (body.x + body.w/2f < x + 0.1f) {
-                        // если середина объекта находится слева, сдвиг влево
+                        // if left, shift to left
                         body.x = x - body.w + PRECISION_H;
                         velocity.x = 0; // stop moving
                     } else if (body.x + body.w/2f > x + 0.5f) {
-                        // иначе если средина справа, то сдвиг вправо
+                        // if right side, shift to right
                         body.x = x + 1 - PRECISION_H;
                         velocity.x = 0; // stop moving
                     }

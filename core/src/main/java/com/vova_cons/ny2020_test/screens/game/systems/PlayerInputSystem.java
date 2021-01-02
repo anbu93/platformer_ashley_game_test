@@ -113,21 +113,21 @@ public class PlayerInputSystem extends EntitySystem {
                     System.out.println("Jump!");
                 }
             }
-            if (moveDirection == 0) { // остановка игрока
-                if (Math.abs(velocity.x) < 0.10f) { // 10 см/с - слишком малая величина, можно пренебречь
+            if (moveDirection == 0) { // stop player
+                if (Math.abs(velocity.x) < 0.10f) { // optimisation
                     velocity.x = 0;
-                } else if (velocity.x < 0) { // двигался влево, придаем силу замедления вправо
+                } else if (velocity.x < 0) { // move to left, add force to right for stop
                     velocity.x += playerDeceleration * deltaTime;
                     if (velocity.x > 0) {
                         velocity.x = 0;
                     }
-                } else if (velocity.x > 0) { // двигался вправо, придаем силу замедления влево
+                } else if (velocity.x > 0) { // move to right, add force to left for stop
                     velocity.x -= playerDeceleration * deltaTime;
                     if (velocity.x < 0) {
                         velocity.x = 0;
                     }
                 }
-            } else { // игрок двигается
+            } else { // player moving
                 velocity.x += moveDirection * playerAcceleration * deltaTime;
                 velocity.x = MathUtils.limit(velocity.x, -maxPlayerSpeed, maxPlayerSpeed);
             }

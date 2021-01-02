@@ -17,7 +17,7 @@ public class DesktopLauncher {
 
 	private static LwjglApplicationConfiguration getDefaultConfiguration() {
 		LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
-		configuration.title = "new_year_2020_test";
+		configuration.title = "platformer_ashley_game_test";
 		configuration.width = (int) (1920 * 0.75f);
 		configuration.height = (int) (1080 * 0.75f);
 		configuration.x = 0;

@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  * Created by anbu on 12.06.19.
  **/
 public abstract class BaseScreen implements Screen {
-    public static float WIDTH = UI.SCENE_WIDE_WIDTH;
+    public static float WIDTH = UI.SCENE_WIDTH;
     public static float HEIGHT = UI.SCENE_HEIGHT;
     public Stage stage;
     public Batch batch;
