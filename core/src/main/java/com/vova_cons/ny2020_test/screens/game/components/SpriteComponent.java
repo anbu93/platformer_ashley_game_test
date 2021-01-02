@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Component;
 public class SpriteComponent implements Component {
     public int z = 0;
     public Type type;
+    public boolean flipX = false;
 
     public SpriteComponent(Type type) {
         this.type = type;

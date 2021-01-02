@@ -28,7 +28,7 @@ public class GroundStandingSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        entities = engine.getEntitiesFor(Families.moved);
+        entities = engine.getEntitiesFor(Families.gravity);
     }
 
     @Override

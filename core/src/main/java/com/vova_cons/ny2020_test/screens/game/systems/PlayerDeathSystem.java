@@ -15,6 +15,7 @@ public class PlayerDeathSystem extends EntitySystem {
     private static final float PRECISION_V = 0.3f;
     private final GameWorld world;
     private ImmutableArray<Entity> entities;
+    private ImmutableArray<Entity> enemies;
 
     public PlayerDeathSystem(GameWorld world) {
         this.world = world;
@@ -29,6 +30,7 @@ public class PlayerDeathSystem extends EntitySystem {
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         entities = engine.getEntitiesFor(Families.player);
+        enemies = engine.getEntitiesFor(Families.enemy);
     }
 
     @Override
@@ -42,6 +44,9 @@ public class PlayerDeathSystem extends EntitySystem {
     private void processPlayer(Entity player) {
         BodyComponent body = Mappers.body.get(player);
         boolean isDeath = checkDeathFromWorldTiles(body);
+        if (!isDeath) {
+            isDeath = checkDeathFromEnemy(body);
+        }
         if (isDeath) {
             world.ui.onPlayerDeath();
             world.state = GameWorld.GAME_OVER;
@@ -58,5 +63,22 @@ public class PlayerDeathSystem extends EntitySystem {
             }
         }
         return false;
+    }
+
+    private boolean checkDeathFromEnemy(BodyComponent body) {
+        for(Entity enemy : enemies) {
+            BodyComponent enemyBody = Mappers.body.get(enemy);
+            if (isCollisions(body, enemyBody)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isCollisions(BodyComponent body, BodyComponent enemyBody) {
+        return Math.abs(body.x + body.w/2f - enemyBody.x + enemyBody.w/2f)
+                        < (body.w/2f + 0.5f*enemyBody.w) &&
+                Math.abs(body.y + body.h/2f - enemyBody.y + enemyBody.h/2f)
+                        < (body.h/2f + 0.5f*enemyBody.h);
     }
 }

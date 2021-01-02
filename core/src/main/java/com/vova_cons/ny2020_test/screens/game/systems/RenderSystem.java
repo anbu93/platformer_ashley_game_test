@@ -117,7 +117,8 @@ public class RenderSystem extends SortedIteratingSystem {
             Texture texture = textures.get(sprite.type);
             batch.draw(texture, -cameraX + body.x * TILE_SIZE,
                     -cameraY + body.y * TILE_SIZE,
-                    body.w * TILE_SIZE, body.h * TILE_SIZE);
+                    body.w * TILE_SIZE, body.h * TILE_SIZE, 0, 0,
+                    texture.getWidth(), texture.getHeight(), sprite.flipX, false);
         } else { // TODO fix after
             AnimationComponent animation = Mappers.animation.get(entity);
             playerRenderer.render(batch, cameraX, cameraY, body, animation);

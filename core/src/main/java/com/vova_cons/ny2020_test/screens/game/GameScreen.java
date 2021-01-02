@@ -54,6 +54,7 @@ public class GameScreen extends BaseScreen {
                         entity.add(new EnemyComponent(EnemyComponent.Type.Slime));
                         entity.add(new SpriteComponent(SpriteComponent.Type.Slime));
                         entity.add(new BodyComponent(enemyData.x, enemyData.y, 0.75f, 0.6f));
+                        entity.add(new GravityComponent());
                         break;
                     case Fly:
                         entity.add(new EnemyComponent(EnemyComponent.Type.Fly));
@@ -70,6 +71,7 @@ public class GameScreen extends BaseScreen {
             engine.addSystem(new MoveSystem(world));
             engine.addSystem(new PlayerDeathSystem(world));
             engine.addSystem(new GroundStandingSystem(world));
+            engine.addSystem(new EnemyMoveSystem());
             engine.addSystem(new MechanismInteractionSystem(world));
             engine.addSystem(new CameraSystem(UI.SCENE_WIDTH / RenderSystem.TILE_SIZE,
                     UI.SCENE_HEIGHT / RenderSystem.TILE_SIZE));
