@@ -57,6 +57,15 @@ public class GameUi extends Group {
         if (tile == TileType.COIN_BRONZE) {
             money += 1;
         }
+        updateScoreLabel();
+    }
+
+    public void addEnemyKillScore(int score) {
+        money += score;
+        updateScoreLabel();
+    }
+
+    private void updateScoreLabel() {
         scoreLabel.setText("Coins: " + money);
     }
 }

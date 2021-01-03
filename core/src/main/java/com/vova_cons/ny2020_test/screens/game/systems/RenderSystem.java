@@ -54,8 +54,12 @@ public class RenderSystem extends SortedIteratingSystem {
                 return new Texture("mario/png/character/front.png");
             case Slime:
                 return new Texture("mario/png/enemies/slime_walk.png");
+            case SlimeDeath:
+                return new Texture("mario/png/enemies/slime_dead.png");
             case Fly:
                 return new Texture("mario/png/enemies/fly_fly.png");
+            case FlyDeath:
+                return new Texture("mario/png/enemies/fly_dead.png");
         }
         return null;
     }

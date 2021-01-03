@@ -1,6 +1,7 @@
 package com.vova_cons.ny2020_test.screens.game.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class BodyComponent implements Component {
@@ -39,5 +40,9 @@ public class BodyComponent implements Component {
 
     public Vector2 getSize(Vector2 size) {
         return size.set(w, h);
+    }
+
+    public Rectangle get(Rectangle rect) {
+        return rect.set(x, y, w, h);
     }
 }

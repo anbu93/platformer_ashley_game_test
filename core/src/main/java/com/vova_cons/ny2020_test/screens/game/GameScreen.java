@@ -74,6 +74,7 @@ public class GameScreen extends BaseScreen {
             engine.addSystem(new MechanismInteractionSystem(world));
             engine.addSystem(new CameraSystem(UI.SCENE_WIDTH / RenderSystem.TILE_SIZE,
                     UI.SCENE_HEIGHT / RenderSystem.TILE_SIZE));
+            engine.addSystem(new EnemyKillSystem(world));
             engine.addSystem(new PlayerDeathSystem(world));
             engine.addSystem(new RenderSystem(world, batch, 1));
         }
