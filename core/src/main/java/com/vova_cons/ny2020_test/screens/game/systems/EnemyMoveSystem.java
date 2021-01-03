@@ -10,10 +10,22 @@ import com.vova_cons.ny2020_test.screens.game.components.SpriteComponent;
 import com.vova_cons.ny2020_test.screens.game.components.VelocityComponent;
 import com.vova_cons.ny2020_test.screens.game.utils.Families;
 import com.vova_cons.ny2020_test.screens.game.utils.Mappers;
+import com.vova_cons.ny2020_test.screens.game.world.GameWorld;
+import com.vova_cons.ny2020_test.screens.game.world.TileType;
 import com.vova_cons.ny2020_test.utils.RandomUtils;
 
 public class EnemyMoveSystem extends EntitySystem {
+    private final GameWorld world;
     private ImmutableArray<Entity> entities;
+
+    public EnemyMoveSystem(GameWorld world) {
+        this.world = world;
+    }
+
+    public EnemyMoveSystem(int priority, GameWorld world) {
+        super(priority);
+        this.world = world;
+    }
 
     @Override
     public void addedToEngine(Engine engine) {
@@ -34,16 +46,39 @@ public class EnemyMoveSystem extends EntitySystem {
         BodyComponent body = Mappers.body.get(entity);
         EnemyComponent enemy = Mappers.enemy.get(entity);
         SpriteComponent sprite = Mappers.sprite.get(entity);
-        if (velocity.x == 0) {
-            velocity.x = 0;
-            enemy.direction = -enemy.direction;
-        } else if (!body.grounded) {
-            body.grounded = true;
-            velocity.x = 0;
-            enemy.direction = -enemy.direction;
+        boolean isUpdated = false;
+        switch(enemy.type) {
+            case Slime:
+                if (velocity.x == 0) { // start move on game start
+                    enemy.direction = -enemy.direction;
+                    isUpdated = true;
+                }
+                if (!isNextTileExists(body, enemy.direction)) {
+                    enemy.direction = -enemy.direction;
+                    isUpdated = true;
+                }
+                break;
+            case Fly:
+                if (velocity.x == 0) { // if enemy stack of border
+                    enemy.direction = -enemy.direction;
+                    isUpdated = true;
+                }
+                break;
         }
-        velocity.x = enemy.direction * getSpeed(enemy.type);
-        sprite.flipX = enemy.direction > 0;
+        if (isUpdated) {
+            velocity.x = enemy.direction * getSpeed(enemy.type);
+            sprite.flipX = enemy.direction > 0;
+        }
+    }
+
+    private boolean isNextTileExists(BodyComponent body, int direction) {
+        int y = (int) body.y - 1;
+        if (Math.abs((body.x+body.w/2f) - (int)(body.x + body.w/2f) - 0.5f) < 0.1f) {
+            int x = (int) (body.x + body.w / 2f);
+            int tile = world.level.get(x + direction, y);
+            return TileType.isGroundTile(tile);
+        }
+        return true;
     }
 
     private float getSpeed(EnemyComponent.Type type) {

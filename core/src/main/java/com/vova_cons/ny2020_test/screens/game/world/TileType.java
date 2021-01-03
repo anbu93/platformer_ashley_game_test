@@ -33,7 +33,7 @@ public class TileType {
     }
 
     public static boolean isCoinsTile(int tile) {
-        return tile == COIN_GOLD || tile == COIN_SILVER;
+        return tile == COIN_GOLD || tile == COIN_SILVER || tile == COIN_BRONZE;
     }
 
     public static int detectTile(char symbol) {
@@ -49,6 +49,7 @@ public class TileType {
             case 'B': return BUTTON_RED;
             case 'g': return COIN_GOLD;
             case 's': return COIN_SILVER;
+            case 'b': return COIN_BRONZE;
         }
         return EMPTY;
     }

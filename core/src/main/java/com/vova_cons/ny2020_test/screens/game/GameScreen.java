@@ -70,7 +70,7 @@ public class GameScreen extends BaseScreen {
             engine.addSystem(new GravitySystem());
             engine.addSystem(new MoveSystem(world));
             engine.addSystem(new GroundStandingSystem(world));
-            engine.addSystem(new EnemyMoveSystem());
+            engine.addSystem(new EnemyMoveSystem(world));
             engine.addSystem(new MechanismInteractionSystem(world));
             engine.addSystem(new CameraSystem(UI.SCENE_WIDTH / RenderSystem.TILE_SIZE,
                     UI.SCENE_HEIGHT / RenderSystem.TILE_SIZE));
